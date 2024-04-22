@@ -5,16 +5,18 @@ if(!defined('_CODE')){
 
 
 
+
 try{
-    if(class_exists('PDO')){
-        $dsn = 'mysql:dbname='._DB.';host='._HOST;
-        $options =[
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ];
-        $CONN = new PDO($dsn, _USER,_PASS,$options);
+    $conn = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME . "", USER, PASS);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if ($conn == true) {
+        echo "<br>";
+    } else {
+        echo "error";
     }
-}catch(Exception $exception){
+
+} catch (PDOException $Exception) {
     echo '<div style="color:red; padding: 5px 15px; border: 1px solid red;">';
     echo $exception -> getMessage().'<br>';
     echo '</div>';

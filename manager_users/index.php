@@ -2,8 +2,20 @@
 session_start();
 require_once('config.php');
 require_once('./includes/connect.php');
+
+require_once('./includes/phpmailer/Exception.php');
+require_once('./includes/phpmailer/PHPMailer.php');
+require_once('./includes/phpmailer/SMTP.php');
+
 require_once('./includes/functions.php');
 require_once('./includes/database.php');
+require_once('./includes/session.php');
+
+
+
+// sendMail('trangquangdai03072004@gmail.com', 'This is a test mail', 'This content of email is served as testing');
+
+
 
 
 $module = _MODULE;

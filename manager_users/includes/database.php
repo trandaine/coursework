@@ -3,7 +3,7 @@ if(!defined('_CODE')){
     die('Access denied...');
 }
 
-function query($sql, $data=[]){
+function query($sql, $data=[], $check = false){
     global $conn;
     $result = false;
     try{
@@ -20,6 +20,10 @@ function query($sql, $data=[]){
         echo 'File: '. $exp -> getFile().'<br>';
         echo 'Line: '. $exp -> getLine();
         die();
+    }
+
+    if($check){
+        return $statement;
     }
     return $result;
 }
@@ -49,4 +53,52 @@ function update($table, $data, $condition=''){
     $rl = query($sql, $data);
     return $rl;
 };
-// Update function
+
+function delete($table, $condition=''){
+    if(empty($condition)){
+        $sql = 'DELETE FROM ' .$table;
+    }else{
+        $sql = 'DELETE FROM '.$table . ' WHERE '.$condition;
+    }
+    $rl = query($sql);
+    return $rl;
+};
+
+// Lay nhieu dong du lieu
+function getRaw($sql){
+    $kq = query($sql, '', true);
+    if(is_object($kq)){
+        $dataFetch = $kq -> fetchAll(PDO::FETCH_ASSOC);
+    }
+    return $dataFetch;
+};
+// Get multiple rows but specific
+function getMultipleRows($table, $condition=''){
+    $sql = 'SELECT * FROM ' . $table;
+    if(!empty($condition)){
+        $sql .= ' WHERE ' . $condition;
+    }
+    $kq = query($sql, '', true);
+    if(is_object($kq)){
+        $dataFetch = $kq -> fetchAll(PDO::FETCH_ASSOC);
+    }
+    return $dataFetch;
+}
+
+// Get one data row
+function getSingleRow($sql){
+    $kq = query($sql, '', true);
+    if(is_object($kq)){
+        $dataFetch = $kq -> fetch(PDO::FETCH_ASSOC);
+    }
+    return $dataFetch;
+};
+
+
+// Count for data rows
+function countRows($sql){
+    $kq = query($sql, '', true);
+    if(!empty($kq)){
+        return $kq ->rowCount();
+    }
+}
