@@ -11,20 +11,20 @@ layouts('header-login', $data);
 
 
 
-if (isPost()) {
-    $filterAll = filter();
-    if(!empty($filterAll['email'])){
-        $email = $filterAll['email'];
-        $queryUser = getSingleRow("SELECT id FROM users WHERE email = '$email'");
-        if(!empty($queryUser)){
-            $userId = $queryUser['id'];
+if (isPost()) {             // Kiem tra phuong thuc POST
+    $filterAll = filter();                      // Lay du lieu tu form
+    if(!empty($filterAll['email'])){                        // Kiem tra email co ton tai k
+        $email = $filterAll['email'];                           // Lay email
+        $queryUser = getSingleRow("SELECT id FROM users WHERE email = '$email'");           // Truy van lay thong tin user theo email
+        if(!empty($queryUser)){                 // Kiem tra user co ton tai k
+            $userId = $queryUser['id'];             // Lay id user
             // Tao forgotToken
-            $forgotToken = sha1(uniqid());
-            $dataUpdate =[
-                'forgotToken' => $forgotToken
+            $forgotToken = sha1(uniqid());          // Tao token
+            $dataUpdate =[              // Tao mang du lieu can update
+                'forgotToken' => $forgotToken               // Cap nhat token vao bang users
             ];
-            $updateStatus = update('users', $dataUpdate, "id=$userId");
-            if($updateStatus){
+            $updateStatus = update('users', $dataUpdate, "id=$userId");                 // Cap nhat token vao bang users
+            if($updateStatus){                              // Kiem tra cap nhat thanh cong k
                 // Tao link khoi phuc mk
                 $linkReset = _WEB_HOST. '?module=auth&action=reset-password&token='.$forgotToken;
                 // Gui mail cho nguoi dung
@@ -33,30 +33,30 @@ if (isPost()) {
                 $content .= 'Please click this link to reset your account password: </br>';
                 $content .= $linkReset . '</br>';
                 $content .= 'Best regard!';
-                $sendEmail = sendMail($email, $subject, $content);
-                if($sendEmail){
-                    setFlashData('msg', 'Email has been sent, please check your inbox or spam section!');
-                    setFlashData('msg_type', 'success');
-                }else{
-                    setFlashData('msg', 'Error! Please try again later.(email)');
-                    setFlashData('msg_type', 'danger');
+                $sendEmail = sendMail($email, $subject, $content);          // Gui mail cho nguoi dung
+                if($sendEmail){             // Kiem tra gui mail thanh cong k
+                    setFlashData('msg', 'Email has been sent, please check your inbox or spam section!');                       // Thong bao gui mail thanh cong
+                    setFlashData('msg_type', 'success');                    // Thong bao gui mail thanh cong
+                }else{              // Gui mail that bai
+                    setFlashData('msg', 'Error! Please try again later.(email)');                           // Thong bao gui mail that bai
+                    setFlashData('msg_type', 'danger');                 // Thong bao gui mail that bai
                 }
-            }else{
-                setFlashData('msg', 'Error! Please try again later.');
-                setFlashData('msg_type', 'danger');
+            }else{        // Cap nhat that bai
+                setFlashData('msg', 'Error! Please try again later.');                          // Thong bao cap nhat that bai
+                setFlashData('msg_type', 'danger');                 // Thong bao cap nhat that bai
             }
-        }else{
-            setFlashData('msg', 'Invalid email address!');
-            setFlashData('msg_type', 'danger');
+        }else{                  // Email khong ton tai
+            setFlashData('msg', 'Invalid email address!');                              // Thong bao email khong ton tai
+            setFlashData('msg_type', 'danger');                             // Thong bao email khong ton tai
         }
-    }else{
-        setFlashData('msg', 'Please enter your email address!');
-        setFlashData('msg_type', 'danger');
+    }else{                      // Email rong
+        setFlashData('msg', 'Please enter your email address!');                    // Thong bao nhap email
+        setFlashData('msg_type', 'danger');                             // Thong bao nhap email
     }
 }
 
-$msg = getFlashData('msg');
-$msgType = getFlashData('msg_type');
+$msg = getFlashData('msg');                     // Lay thong bao
+$msgType = getFlashData('msg_type');                            // Lay loai thong bao
 
 
 

@@ -153,3 +153,44 @@ if(!$checkLogin){
 }
 return $checkLogin;
 }
+
+function display_succeed()
+{
+    global $succeed;
+    if ($succeed) {
+        echo '<div class="success">';
+        echo $succeed . '<br>';
+        echo '</div>';
+    }
+    $success = "";
+}
+function display_error()
+{
+    global $errors;
+
+    if (count($errors) > 0) {
+        echo '<div class="error">';
+        foreach ($errors as $error) {
+            echo $error . '<br>';
+        }
+        echo '</div>';
+    }
+}
+function display_success()
+{
+    global $success;
+    if ($success) {
+        echo '<div class="success">';
+        echo $success . '<br>';
+        echo '</div>';
+    }
+    $success = "";
+}
+
+
+
+
+
+
+
+

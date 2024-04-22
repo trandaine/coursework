@@ -3,7 +3,7 @@ body{
 }
 .wrapper{
     width: 330px;
-    padding: 2ram 1 rem;
+    padding: 2rem 1 rem;
     margin: 50px auto;
     background-color: #fff  ;
     border-radius: 10px;
@@ -11,12 +11,25 @@ body{
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
 }
 
+.wrapper2{
+    width: 1000px;                              /*  set the width of the form to 330px  */
+    padding: 4rem 2 rem;              /*   set the top and bottom padding to 4 times the root element's font size, and the left and right padding to 2 times the root element's font size  */      
+    margin: 50px auto;                  /*  center the form on the page  */
+    background-color: #fff  ;           /*  set the background color of the form to white  */
+    border-radius: 10px;                /*  set the border radius of the form to 10px  */
+    text-align: center;                 /*  center the text inside the form  */
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);                     /*  add a box shadow to the form  */
+}
+
+
+
+
 h1{
     font-size: 2rem;
     color: #07001f;
     margin-bottom: 1.2rem;
 }
-form input{
+form input{                        /*  select all input elements inside the form  */
     width: 92%;
     outline: none;
     border: 1px solid #fff;
