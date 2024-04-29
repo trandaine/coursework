@@ -41,7 +41,7 @@ if(!defined('_CODE')){
           <ul class="dropdown-menu text-small">
             <li><a class="dropdown-item" href="?module=post&action=new_post">New post...</a></li>
             <li><a class="dropdown-item" href="?module=user&action=edit">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="?module=post&action=view">Your questions</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="?module=auth&action=logout">Sign out</a></li>
           </ul>

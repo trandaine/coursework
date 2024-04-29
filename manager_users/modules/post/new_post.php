@@ -32,11 +32,11 @@ if (isPost()) {
                 setFlashData('msg', 'Question has been posted!');
                 setFlashData('msg_type', 'success');
             }else{
-                setFlashData('msg', 'Error occur, Please try again!');
+                setFlashData('msg', 'Error occur, Please try again!1');
                 setFlashData('msg_type', 'danger');
             }
         } else {
-            setFlashData('msg', 'Error occur, Please try again!');
+            setFlashData('msg', 'Error occur, Please try again!2');
             setFlashData('msg_type', 'danger');
         }
     } else {
